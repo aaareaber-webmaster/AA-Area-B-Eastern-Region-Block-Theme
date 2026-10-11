@@ -1,0 +1,1877 @@
+/*
+Theme Name: AA Area B Eastern Region
+Theme URI: https://aaareaber.org.au
+Author: Hamish Wright
+Description: Custom block theme for AA Area B Eastern Region.
+Version: 1.0.0
+Text Domain: aa-area-b
+*/
+
+:root {
+  --area-red: var(--wp--preset--color--aa-red);
+  --area-text: var(--wp--preset--color--foreground);
+  --area-muted: var(--wp--preset--color--muted-text);
+  --area-border: var(--wp--preset--color--border);
+  --area-soft: var(--wp--preset--color--surface);
+  --area-dark: var(--wp--preset--color--dark);
+  --area-container: min(1320px, calc(100% - 40px));
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  margin: 0;
+}
+
+.wp-site-blocks {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+body
+  .is-layout-constrained
+  > :where(:not(.alignleft):not(.alignright):not(.alignfull)) {
+  max-width: var(--wp--style--global--content-size);
+}
+
+body .is-layout-constrained > .alignwide {
+  max-width: var(--wp--style--global--wide-size);
+}
+
+body .is-layout-constrained > .alignfull {
+  width: 100%;
+  max-width: none;
+}
+
+.entry-content,
+main {
+    margin-block-start: var(--wp--preset--spacing--0);
+    margin-block-end: var(--wp--preset--spacing--0);
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Carousel sizing must not override authored block widths elsewhere. */
+.carousel-cta {
+  max-width: 100%;
+  flex-wrap: wrap;
+}
+.carousel-cta > .wp-block-button {
+  min-width: 0;
+  max-width: 100%;
+}
+.carousel-cta .wp-block-button__link {
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+::selection {
+  background-color: var(--area-red);
+  color: var(--wp--preset--color--white);
+}
+
+.site-header-inner {
+  width: 100%;
+  box-sizing: border-box;
+  flex-wrap: nowrap;
+}
+
+.site-branding {
+  flex: 0 1 auto;
+  min-width: 0;
+  flex-wrap: nowrap;
+}
+
+.site-branding .wp-block-site-logo {
+  flex: 0 0 auto;
+}
+
+.site-branding .wp-block-site-logo img {
+  display: block;
+  width: 61px;
+  height: auto;
+}
+
+.site-branding-text {
+  min-width: 0;
+}
+
+.site-branding-title,
+.site-branding-region {
+  margin: 0;
+  padding: 0;
+  line-height: 1.1;
+  white-space: nowrap;
+  text-align: left;
+}
+
+.site-branding-title {
+  font-size: 0.875rem;
+}
+
+.site-branding-region {
+  font-size: 0.875rem;
+}
+
+/* ==========================================================================
+   Navigation overlay
+   ========================================================================== */
+
+.area-overlay-navigation {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+  gap: 0;
+}
+
+/*
+ * Parent rows.
+ *
+ * Page List outputs the parent link itself, while navigation-slides.js
+ * inserts the separate submenu toggle alongside it.
+ */
+.area-overlay-navigation .has-child {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 100%;
+}
+
+/*
+ * Allow the parent page link to occupy the available row width while
+ * leaving room for the submenu toggle.
+ */
+.area-overlay-navigation
+  .has-child
+  > .wp-block-pages-list__item__link,
+.area-overlay-navigation
+  .has-child
+  > .wp-block-navigation-item__content {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+/*
+ * Synthetic submenu toggle created by navigation-slides.js.
+ */
+.area-overlay-navigation .area-slide-toggle {
+  flex: 0 0 auto;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: 0;
+  padding: 0.6rem 0.75rem;
+
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.area-overlay-navigation .area-slide-toggle svg {
+  display: block;
+  width: 0.8rem;
+  height: 0.8rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/*
+ * Submenu panels.
+ *
+ * These are positioned as normal document-flow panels rather than
+ * WordPress's desktop dropdown menus.
+ */
+.area-overlay-navigation
+  .has-child
+  > .wp-block-navigation__submenu-container {
+  position: static !important;
+  inset: auto !important;
+  z-index: auto !important;
+
+  flex: 0 0 100%;
+  flex-direction: column;
+  align-items: stretch;
+
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: none !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/*
+ * Page List marks automatic parents as open-always.
+ * Ignore that for the custom sliding navigation and keep all child
+ * panels hidden until navigation-slides.js activates one.
+ */
+.area-slide-navigation
+  .wp-block-navigation__submenu-container {
+  display: none !important;
+}
+
+/*
+ * The JS adds area-slide-current to whichever panel is currently
+ * being displayed.
+ */
+.area-slide-navigation
+  .wp-block-navigation__submenu-container.area-slide-current {
+  display: flex !important;
+}
+
+/*
+ * Child items fill the sliding panel.
+ */
+.area-overlay-navigation
+  .wp-block-navigation__submenu-container
+  > .wp-block-navigation-item {
+  width: 100%;
+}
+
+/*
+ * Page List and Navigation Link blocks use slightly different link
+ * classes, so support both.
+ */
+.area-overlay-navigation
+  .wp-block-navigation__submenu-container
+  .wp-block-navigation-item__content,
+.area-overlay-navigation
+  .wp-block-navigation__submenu-container
+  .wp-block-pages-list__item__link {
+  display: block;
+  width: 100%;
+  padding: 0.6rem 0;
+
+  color: var(--wp--preset--color--white);
+}
+
+/*
+ * Header row inserted at the top of each sliding submenu.
+ */
+.area-overlay-navigation .area-slide-heading {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  width: 100%;
+  padding: 0.6rem 0;
+}
+
+.area-overlay-navigation .area-slide-back {
+  margin: 0;
+  padding: 0;
+
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+}
+
+/*
+ * Don't progressively indent nested menus. Each submenu becomes its
+ * own full-width sliding panel.
+ */
+.area-overlay-navigation
+  .wp-block-navigation__submenu-container
+  .wp-block-navigation__submenu-container {
+  padding-left: 0 !important;
+}
+
+@media (max-width: 600px) {
+  .site-header-inner {
+    padding: 0.625rem 0.75rem;
+    gap: 0.5rem;
+  }
+
+  .site-branding {
+    gap: 0.5rem;
+  }
+
+  .site-branding .wp-block-site-logo img {
+    width: 48px;
+  }
+
+  .site-branding-title,
+  .site-branding-region {
+    font-size: 0.68rem;
+    line-height: 1.1;
+  }
+}
+
+.area-main {
+  width: 100%;
+  flex: 1 0 auto;
+  max-width: none;
+  margin-right: auto;
+  margin-left: auto;
+  padding-top: 44px;
+  padding-bottom: 58px;
+}
+
+.area-front-main {
+  width: 100%;
+  max-width: none;
+  padding-top: 0;
+}
+
+.area-front-main > * {
+  width: var(--area-container);
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.area-front-main > .alignfull {
+  width: 100%;
+  max-width: none;
+}
+
+.area-singular-main .area-entry-title,
+.area-archive-title,
+h1.entry-title,
+.page-title {
+  margin-top: 0;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--area-border);
+  color: var(--area-text);
+  font-family: var(--wp--preset--font-family--poppins);
+  font-size: var(--wp--preset--font-size--large);
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.area-entry-meta,
+.entry-meta,
+.entry-meta * {
+  color: var(--area-red);
+  font-size: 0.875rem;
+  line-height: 1.45;
+}
+
+.area-post-list {
+  display: grid;
+  gap: 28px;
+  margin: 0;
+  padding: 0;
+}
+
+.area-post-card {
+  padding: clamp(1.25rem, 3vw, 1.875rem);
+  border: 1px solid var(--area-border);
+  border-radius: var(--wp--custom--radius--component);
+  background: var(--wp--preset--color--white);
+  box-shadow: var(--wp--custom--shadow--card);
+  transition:
+    box-shadow 150ms ease,
+    transform 150ms ease;
+}
+
+.area-post-card:hover {
+  box-shadow: var(--wp--custom--shadow--hover);
+  transform: translateY(-1px);
+}
+
+.area-post-card__title {
+  margin: 0 0 10px;
+  font-size: 21px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.area-post-card__title a {
+  color: var(--area-text);
+}
+
+.area-post-card__title a:hover,
+.area-post-card__title a:focus-visible {
+  color: var(--area-red);
+}
+
+.area-post-card__date,
+time.wp-block-latest-posts__post-date {
+  color: rgb(12 12 12 / 50%);
+  font-size: 14px;
+}
+
+.area-post-card__excerpt {
+  margin-top: 14px;
+  color: var(--area-muted);
+}
+
+.wp-block-latest-posts.wp-block-latest-posts__list {
+  margin: 0;
+  padding: 15px 20px;
+  border: 1px solid var(--area-border);
+  border-radius: var(--wp--custom--radius--component);
+  background-color: var(--area-soft);
+}
+
+.wp-block-latest-posts.wp-block-latest-posts__list li {
+  clear: both;
+  margin-top: 1.5em;
+  padding-bottom: 10px;
+  color: var(--area-text);
+  font-size: 16px;
+}
+
+.wp-block-latest-posts__list.has-dates li a {
+  color: var(--area-text);
+  font-family: var(--wp--preset--font-family--poppins);
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.wp-block-latest-posts__list.has-dates li a:hover,
+table a:hover {
+  color: var(--area-red);
+}
+
+.wp-block-query-pagination {
+  margin-top: 34px;
+}
+
+.wp-block-query-pagination a,
+.post-navigation-link__label {
+  color: var(--area-red);
+  font-weight: 500;
+}
+
+.search-form .search-field,
+.wp-block-search__input,
+input[type="search"],
+input[type="text"],
+input[type="email"],
+input[type="url"],
+input[type="tel"],
+textarea,
+select {
+  min-height: 42px;
+  border: 1px solid var(--area-border);
+  border-radius: var(--wp--custom--radius--component);
+  font-family: inherit;
+  font-size: 16px;
+}
+
+.pstn-email-form > #pstn-optin-2-email::placeholder {
+    text-align:center;
+}
+
+/* Integrated form controls inherit the shared button tokens. */
+:where(.gform_wrapper, .search-form)
+  :is(input[type="submit"], input[type="button"], button[type="submit"]) {
+  padding: 0.75em 1.5em;
+  border: 0;
+  border-radius: var(--wp--custom--radius--button);
+  background: var(--area-red);
+  color: var(--wp--preset--color--white);
+  font: inherit;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+:where(.gform_wrapper, .search-form)
+  :is(input[type="submit"], input[type="button"], button[type="submit"]):hover {
+  background: var(--wp--preset--color--aa-red-dark);
+}
+
+.subscribe-link {
+  margin-top: 15px;
+}
+
+.subscribe-link a {
+  display: inline-block;
+  padding: 20px 40px;
+  border: 2px solid var(--area-dark);
+  border-radius: 4px;
+  background-color: var(--area-dark);
+  color: var(--wp--preset--color--white);
+  font-family: var(--wp--preset--font-family--poppins);
+  font-size: 18px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.subscribe-link a:hover {
+  background: transparent;
+  color: var(--area-dark);
+  text-decoration: none;
+}
+
+.single-meeting nav.navigation.post-navigation .nav-previous a,
+.single-meeting nav.navigation.post-navigation .nav-next a {
+  color: var(--area-red);
+}
+
+input#gform_submit_button_1,
+#gform_submit_button_2 {
+  width: 100%;
+}
+
+.gform_wrapper.gravity-theme .gfield textarea.large {
+  height: 80px;
+}
+
+.gform_wrapper.gravity-theme .gfield_label {
+  display: inline-block;
+  margin-bottom: 8px;
+  padding: 0;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.gform_wrapper .gfield_error .gfield_repeater_cell label,
+.gform_wrapper .gfield_error label,
+.gform_wrapper .gfield_error legend,
+.gform_wrapper .gfield_validation_message,
+.gform_wrapper .validation_message,
+.gform_wrapper [aria-invalid="true"] + label,
+.gform_wrapper label + [aria-invalid="true"] {
+  color: var(--area-red) !important;
+}
+
+.gform_wrapper .gform_validation_errors > h2.hide_summary {
+  display: none;
+}
+
+.tribe-common .tribe-common-l-container,
+.tribe-common-l-container.tribe-events-l-container,
+#tribe-events-pg-template {
+  max-width: 100%;
+  padding-top: 32px;
+  font-family: var(--wp--preset--font-family--poppins);
+}
+
+.tribe-events .tribe-events-c-search__button {
+  background-color: var(--area-red);
+}
+
+.tribe-common .tribe-common-anchor-thin {
+  border: 0;
+}
+
+.tribe-common .tribe-common-anchor-thin:active,
+.tribe-common .tribe-common-anchor-thin:focus,
+.tribe-common .tribe-common-anchor-thin:hover,
+nav.tribe-events-nav-pagination a:hover {
+  border: 0;
+  color: var(--area-red);
+}
+
+.tribe-events-event-meta.primary,
+.tribe-events-event-meta.secondary {
+  width: 100%;
+}
+
+.tribe-events-event-meta::before,
+.tribe-events-event-meta ~ div:not(.tribe-events-event-meta, .event-tickets) {
+  border-top: 0;
+}
+
+.tribe-events-back a {
+  font-weight: 400;
+}
+
+.tribe-events .tribe-events-calendar-list__event-date-tag-datetime,
+.tribe-events-widget .tribe-events-widget-events-list__event-date-tag-datetime {
+  display: flex;
+  flex: 0 0 78px;
+  flex-direction: column;
+  width: 78px;
+  height: 78px;
+  margin-right: 8px;
+  padding-top: var(--tec-spacer-0);
+  text-align: center;
+  background-image: url("https://aaareaber.org.au/wp-content/uploads/2021/12/AA-Events.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+time.tribe-events-widget-events-list__event-date-tag-datetime span,
+time.tribe-events-calendar-list__event-date-tag-datetime span {
+  display: none;
+}
+
+.tribe-events-widget .tribe-events-widget-events-list__event-date-tag {
+  width: 100px;
+}
+
+.tribe-events-widget-events-list__event-datetime {
+  color: var(--area-red);
+  font:
+    normal normal normal 16px/25px "Poppins",
+    Arial,
+    sans-serif;
+}
+
+.tribe-events-widget .tribe-events-widget-events-list__events {
+  padding: 20px 20px 20px 0;
+}
+
+.tribe-events-widget
+  .tribe-events-widget-events-list__event-wrapper.tribe-common-g-col {
+  margin-left: 20px;
+  padding: 10px;
+}
+
+a.tribe-events-widget-events-list__view-more-link.tribe-common-anchor-thin {
+  margin-left: 40px;
+  padding: 0;
+  color: var(--area-muted);
+}
+
+#tribe-events-content h1 {
+  font-family: var(--wp--preset--font-family--poppins);
+  font-size: 20px;
+  font-weight: 600;
+}
+
+#tribe-events-content h2 {
+  color: var(--area-red);
+  font-size: 15px;
+  font-weight: 600;
+}
+
+h3.tribe-events-widget-events-list__event-title.tribe-common-h7 a {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+header.tribe-events-widget-events-list__header h2,
+h2.tribe-events-widget-events-list__header-title.tribe-common-h6.tribe-common-h--alt {
+  margin-bottom: 7px;
+  padding-bottom: 13px;
+  border-bottom: 3px solid var(--area-red);
+  font-family: var(--wp--preset--font-family--poppins);
+  font-size: 30px;
+}
+
+address.tribe-events-calendar-list__event-venue.tribe-common-b2 span {
+  font-weight: 100;
+}
+
+.tribe-events
+  .tribe-events-calendar-list
+  article.tribe-events-calendar-list__event {
+  padding: 0;
+}
+
+:where(.wp-site-blocks) > :last-child {
+	margin-block-start: var(--wp--preset--spacing--0);
+}
+
+.area-b-footer {
+  flex-shrink: 0;
+  background: var(--area-dark);
+  color: var(--wp--preset--color--white);
+}
+
+.area-b-footer__main {
+  padding: 48px 0 42px;
+}
+
+.area-b-footer__main > .area-b-footer__grid {
+  width: var(--area-container);
+  max-width: var(--area-container);
+  margin-right: auto;
+  margin-left: auto;
+  gap: 44px;
+  align-items: flex-start !important;
+}
+
+.area-b-footer__brand {
+  display: flex;
+  align-items: flex-start;
+  padding-top: 4px;
+}
+
+.area-b-footer__logo {
+  max-width: 250px;
+}
+
+.area-b-footer__logo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: brightness(0) invert(1);
+  opacity: 0.9;
+}
+
+.area-b-footer .area-b-footer__heading {
+  margin: 0 0 16px;
+  color: var(--wp--preset--color--white);
+  font-size: 1.35rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.area-b-footer a {
+  color: var(--wp--preset--color--white);
+  text-decoration: none;
+}
+
+.area-b-footer__navigation .wp-block-navigation__container {
+  gap: 9px;
+  align-items: flex-start;
+}
+
+.area-b-footer__navigation .wp-block-navigation-item__content {
+  display: inline-block;
+  padding: 0;
+  color: var(--wp--preset--color--white);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  opacity: 0.78;
+  transition:
+    opacity 150ms ease,
+    transform 150ms ease;
+}
+
+.area-b-footer__navigation .wp-block-navigation-item__content:hover,
+.area-b-footer__navigation .wp-block-navigation-item__content:focus-visible {
+  opacity: 1;
+  transform: translateX(2px);
+}
+
+.area-b-footer__bottom {
+  border-top: 1px solid rgb(255 255 255 / 12%);
+  background: var(--wp--preset--color--footer-bottom);
+}
+
+.area-b-footer__bottom-inner {
+  min-height: 56px;
+  padding: 16px 0;
+  gap: 0;
+}
+
+.area-b-footer__legal-navigation .wp-block-navigation__container {
+  gap: 0;
+}
+
+.area-b-footer__legal-navigation .wp-block-navigation-item__content,
+.area-b-footer__copyright {
+  display: block;
+  margin: 0;
+  color: var(--wp--preset--color--white);
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.5;
+  opacity: 0.75;
+}
+
+.area-b-footer__copyright {
+  margin-left: 18px;
+  padding-left: 18px;
+  border-left: 1px solid rgb(255 255 255 / 25%);
+}
+
+.area-b-footer__legal-navigation .wp-block-navigation-item__content:hover,
+.area-b-footer__legal-navigation
+  .wp-block-navigation-item__content:focus-visible {
+  opacity: 1;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+@media (max-width: 1100px) {
+  .area-primary-navigation .wp-block-navigation-item__content {
+    padding-right: 7px;
+    padding-left: 7px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 921px) {
+  .area-site-header .area-header-inner {
+    min-height: 78px;
+  }
+
+  .area-site-logo img {
+    max-width: min(265px, calc(100vw - 100px));
+  }
+
+  .area-primary-navigation {
+    flex: 0 0 auto;
+  }
+
+  .area-b-footer__main > .area-b-footer__grid {
+    flex-wrap: wrap !important;
+  }
+
+  .area-b-footer__brand {
+    flex-basis: 100% !important;
+  }
+}
+
+@media (max-width: 767px) {
+  :root {
+    --area-container: min(100% - 28px, 1320px);
+  }
+
+  .area-main {
+    padding-top: 32px;
+    padding-bottom: 42px;
+  }
+
+  .area-singular-main .area-entry-title,
+  .area-archive-title,
+  h1.entry-title,
+  .page-title {
+    font-size: var(--wp--preset--font-size--large);
+  }
+
+  .area-post-card {
+    padding: 22px;
+  }
+
+  .subscribe-link {
+    text-align: center;
+  }
+
+  .subscribe-link a {
+    padding: 10px 30px;
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 600px) {
+  .area-b-footer__main {
+    padding: 38px 0 34px;
+  }
+
+  .area-b-footer__main > .area-b-footer__grid {
+    display: block;
+  }
+
+  .area-b-footer__menu-column {
+    margin-top: 28px;
+  }
+
+  .area-b-footer__logo {
+    max-width: 230px;
+  }
+
+  .area-b-footer__bottom-inner {
+    flex-wrap: nowrap !important;
+    gap: 0;
+    justify-content: center;
+  }
+
+  .area-b-footer__legal-navigation,
+  .area-b-footer__legal-navigation .wp-block-navigation__container {
+    flex: 0 0 auto;
+  }
+
+  .area-b-footer__legal-navigation .wp-block-navigation-item__content,
+  .area-b-footer__copyright {
+    font-size: 0.8125rem;
+    white-space: nowrap;
+  }
+
+  .area-b-footer__copyright {
+    margin-left: 12px;
+    padding-left: 12px;
+  }
+}
+
+@media (max-width: 999px) {
+  .tribe-events .tribe-events-calendar-list__event-date-tag {
+    flex: none;
+    position: relative;
+    width: auto;
+  }
+}
+
+/* ==========================================================================
+   Shared page components
+   ========================================================================== */
+
+/* Shared page components use the theme.json design tokens. */
+
+/* ==========================================================================
+   Global section spacing
+   ========================================================================== */
+
+.area-page .area-section,
+.area-page .area-hero,
+.area-page .area-final-cta {
+  padding-block: clamp(3rem, 6vw, 5rem);
+}
+
+.area-page .area-section__heading {
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+}
+
+.area-page .area-section__heading > *:last-child {
+  margin-bottom: 0;
+}
+
+.area-page h1,
+.area-page h2,
+.area-page h3 {
+  text-wrap: balance;
+}
+
+.area-page h2 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.area-page h3 {
+  margin-top: 0;
+  margin-bottom: 0.65rem;
+}
+
+.area-page p {
+  line-height: 1.65;
+}
+
+.area-page .area-section__lead,
+.area-page .area-hero__lead {
+  font-size: clamp(1.08rem, 1.4vw, 1.25rem);
+  line-height: 1.55;
+  color: var(--area-muted);
+}
+
+/* ==========================================================================
+   Eyebrow labels
+   ========================================================================== */
+
+.area-page .area-eyebrow {
+  margin-bottom: 0.55rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--area-red);
+}
+
+/* ==========================================================================
+   Hero
+   ========================================================================== */
+
+.area-page .area-hero {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(
+    135deg,
+    var(--wp--preset--color--surface-warm) 0%,
+    var(--wp--preset--color--white) 55%,
+    var(--area-soft) 100%
+  );
+  border-bottom: 1px solid var(--area-border);
+}
+
+.area-page .area-hero::after {
+  content: "";
+  position: absolute;
+  right: -5rem;
+  top: -7rem;
+  width: 22rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: color-mix(
+    in srgb,
+    var(--area-red) calc(0.08 * 100%),
+    transparent
+  );
+  pointer-events: none;
+}
+
+.area-page .area-hero__inner {
+  position: relative;
+  z-index: 1;
+}
+
+.area-page .area-hero__title {
+  margin-top: 0;
+  margin-bottom: 1.2rem;
+  max-width: 14ch;
+  font-size: clamp(2.6rem, 6vw, 5rem);
+  line-height: 0.98;
+  letter-spacing: -0.04em;
+}
+
+.area-page .area-hero__lead {
+  max-width: 46rem;
+  margin-bottom: 1rem;
+}
+
+.area-page .area-hero__buttons {
+  margin-top: 1.6rem;
+}
+
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
+
+.area-page .wp-block-button__link {
+  transition:
+    background-color 160ms ease,
+    color 160ms ease,
+    border-color 160ms ease,
+    transform 160ms ease;
+}
+
+.area-page .wp-block-button:not(.is-style-outline) .wp-block-button__link {
+  background: var(--area-red);
+  color: var(--wp--preset--color--white);
+}
+
+.area-page
+  .wp-block-button:not(.is-style-outline)
+  .wp-block-button__link:hover {
+  background: var(--wp--preset--color--aa-red-dark);
+  transform: translateY(-1px);
+}
+
+.area-page .wp-block-button.is-style-outline .wp-block-button__link {
+  border-color: var(--area-red);
+  color: var(--wp--preset--color--aa-red-dark);
+}
+
+.area-page .wp-block-button.is-style-outline .wp-block-button__link:hover {
+  background: var(--wp--preset--color--surface-warm);
+}
+
+/* ==========================================================================
+   Current service strip
+   ========================================================================== */
+
+.area-page .area-status {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.area-page .area-status__inner {
+  gap: 0.65rem 1rem;
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--area-border);
+  border-left: 4px solid var(--area-red);
+  border-radius: var(--wp--custom--radius--component);
+  background: var(--wp--preset--color--white);
+  box-shadow: var(--wp--custom--shadow--card);
+}
+
+.area-page .area-status__inner p {
+  margin: 0;
+}
+
+.area-page .area-status__label {
+  color: var(--wp--preset--color--aa-red-dark);
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   Cards
+   ========================================================================== */
+
+.area-page .area-card-grid,
+.area-page .area-resource-grid {
+  gap: clamp(1rem, 2vw, 1.5rem);
+}
+
+.area-page .area-card,
+.area-page .area-resource-group {
+  height: 100%;
+  padding: clamp(1.25rem, 2vw, 1.6rem);
+  border: 1px solid var(--area-border);
+  border-radius: var(--wp--custom--radius--component);
+  background: var(--wp--preset--color--white);
+  box-shadow: var(--wp--custom--shadow--card);
+}
+
+.area-page .area-card p:last-child,
+.area-page .area-resource-group p:last-child {
+  margin-bottom: 0;
+}
+
+.area-page .area-card--featured {
+  border-color: color-mix(
+    in srgb,
+    var(--area-red) calc(0.35 * 100%),
+    transparent
+  );
+  background: linear-gradient(
+    180deg,
+    var(--wp--preset--color--surface-warm),
+    var(--wp--preset--color--white)
+  );
+}
+
+.area-page .area-card__label {
+  margin-bottom: 0.5rem;
+  color: var(--wp--preset--color--aa-red-dark);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.area-page .area-card-grid {
+  align-items: stretch;
+}
+
+.area-page .area-card-grid > .wp-block-column.area-card {
+  height: auto;
+  align-self: stretch;
+}
+
+/* ==========================================================================
+   Recruitment section
+   ========================================================================== */
+
+.area-page .area-section--soft {
+  background: var(--area-soft);
+  border-block: 1px solid var(--area-border);
+}
+
+.area-page .area-section--soft .area-card {
+  background: var(--wp--preset--color--white);
+}
+
+.area-page .area-callout {
+  margin-top: clamp(2rem, 4vw, 3rem);
+  padding: clamp(1.4rem, 3vw, 2rem);
+  border-left: 4px solid var(--area-red);
+  border-radius: 0 var(--wp--custom--radius--component)
+    var(--wp--custom--radius--component) 0;
+  background: var(--wp--preset--color--surface-warm);
+}
+
+.area-page .area-callout > *:last-child {
+  margin-bottom: 0;
+}
+
+/* ==========================================================================
+   Mid-page CTA
+   ========================================================================== */
+
+.area-page .area-cta {
+  margin-top: clamp(2rem, 4vw, 3.5rem);
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+  border-radius: var(--wp--custom--radius--component);
+  background: var(--area-dark);
+  color: var(--wp--preset--color--white);
+  text-align: center;
+}
+
+.area-page .area-cta h3,
+.area-page .area-cta p,
+.area-page .area-cta a {
+  color: inherit;
+}
+
+.area-page .area-cta .wp-block-buttons {
+  justify-content: center;
+}
+
+.area-page .area-contact-email {
+  margin-top: 0.8rem;
+  font-size: 0.95rem;
+}
+
+.area-page .area-contact-email a {
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+
+/* ==========================================================================
+   Facilities section
+   ========================================================================== */
+
+.area-page .area-section--plain {
+  padding-block: clamp(3rem, 6vw, 5rem);
+}
+
+/* ==========================================================================
+   Professionals
+   ========================================================================== */
+
+.area-page .area-section--warm {
+  background: var(--wp--preset--color--surface-warm);
+  border-block: 1px solid var(--area-border);
+}
+
+/* ==========================================================================
+   Resources
+   ========================================================================== */
+
+.area-page .area-resource-group {
+  background: var(--area-soft);
+  box-shadow: none;
+}
+
+.area-page .area-resource-list {
+  padding-left: 1.25rem;
+  margin-bottom: 0;
+}
+
+.area-page .area-resource-list li {
+  margin-bottom: 0.65rem;
+  line-height: 1.45;
+}
+
+.area-page .area-resource-list li:last-child {
+  margin-bottom: 0;
+}
+
+.area-page .area-resource-list a {
+  color: var(--wp--preset--color--aa-red-dark);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.15em;
+}
+
+.area-page .area-resource-list a:hover {
+  color: var(--area-red);
+}
+
+/* ==========================================================================
+   Team
+   ========================================================================== */
+
+.area-page .area-split-section {
+  background: var(--area-soft);
+  border-block: 1px solid var(--area-border);
+}
+
+/* ==========================================================================
+   Existing members
+   ========================================================================== */
+
+.area-page .area-section--centered__inner {
+  text-align: center;
+}
+
+.area-page .area-section--centered__inner .wp-block-buttons {
+  justify-content: center;
+}
+
+/* ==========================================================================
+   Final CTA
+   ========================================================================== */
+
+.area-page .area-final-cta {
+  position: relative;
+  overflow: hidden;
+  background: var(--area-dark);
+  color: var(--wp--preset--color--white);
+}
+
+.area-page .area-final-cta::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: -12rem;
+  width: 26rem;
+  aspect-ratio: 1;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: color-mix(
+    in srgb,
+    var(--area-red) calc(0.12 * 100%),
+    transparent
+  );
+}
+
+.area-page .area-final-cta > * {
+  position: relative;
+  z-index: 1;
+}
+
+.area-page .area-final-cta h2,
+.area-page .area-final-cta p,
+.area-page .area-final-cta a {
+  color: inherit;
+}
+
+.area-page .area-final-cta h2 {
+  max-width: 18ch;
+  margin-inline: auto;
+}
+
+.area-page .area-final-cta .wp-block-buttons {
+  margin-top: 1.5rem;
+}
+
+/* ==========================================================================
+   Links
+   ========================================================================== */
+
+.area-page a {
+  text-underline-offset: 0.15em;
+}
+
+/* ==========================================================================
+   Responsive behaviour
+   ========================================================================== */
+
+@media (max-width: 900px) {
+  .area-page .area-card-grid--four {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .area-page .area-card-grid--four > .wp-block-column {
+    width: auto;
+    flex-basis: auto !important;
+  }
+}
+
+@media (max-width: 700px) {
+  .area-page .area-section,
+  .area-page .area-hero,
+  .area-page .area-final-cta {
+    padding-block: 2.75rem;
+  }
+
+  .area-page .area-hero__title {
+    font-size: clamp(2.5rem, 11vw, 4rem);
+  }
+
+  .area-page .area-card-grid,
+  .area-page .area-card-grid--four,
+  .area-page .area-resource-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .area-page .area-status__inner {
+    display: block;
+  }
+
+  .area-page .area-status__label {
+    margin-bottom: 0.25rem;
+  }
+
+  .area-page .wp-block-buttons {
+    gap: 0.65rem;
+  }
+
+  .area-page
+    :is(.area-actions--stack-mobile, .area-actions)
+    > .wp-block-button {
+    width: 100%;
+  }
+
+  .area-page
+    :is(.area-actions--stack-mobile, .area-actions)
+    .wp-block-button__link {
+    width: 100%;
+    text-align: center;
+  }
+
+  .area-page .area-split-section .wp-block-columns {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .area-page .area-split-section .wp-block-column {
+    flex-basis: auto !important;
+  }
+}
+
+.area-page .area-final-cta {
+  margin-bottom: 0;
+}
+
+/* ==========================================================================
+   Reduced motion
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .area-page .wp-block-button__link {
+    transition: none;
+  }
+}
+
+/* Keep authored video embeds within their content column. */
+.entry-content iframe[src*="youtube.com/embed/"],
+.entry-content iframe[src*="youtube-nocookie.com/embed/"] {
+  display: block;
+  width: 100%;
+  max-width: 560px;
+  height: auto;
+  aspect-ratio: 16 / 9;
+}
+
+@media (max-width: 1100px) {
+  /* Keep the full desktop menu out of widths where it cannot fit. */
+  .site-header
+    nav.area-primary-navigation
+    > .wp-block-navigation__responsive-container-open {
+    display: flex;
+  }
+
+  .site-header
+    nav.area-primary-navigation
+    > .wp-block-navigation__responsive-container:not(.is-menu-open) {
+    display: none;
+  }
+
+  /* Standard page titles and content share one gutter. */
+  .area-singular-main {
+    padding-inline: 1rem;
+  }
+
+  /* Allow long addresses to wrap within narrower content columns. */
+  .entry-content {
+    overflow-wrap: anywhere;
+  }
+
+  .entry-content .wp-block-column {
+    min-width: 0;
+  }
+
+  /* Homepage text needs gutters; full-width covers and carousel keep theirs. */
+  .home main > .entry-content > :not(.alignfull) {
+    max-width: calc(100% - 2rem);
+    margin-inline: auto;
+  }
+}
+
+.area-overlay-navigation {
+  color: var(--wp--preset--color--white);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.8;
+}
+
+.area-overlay-navigation .wp-block-navigation-item {
+  width: 100%;
+  min-width: 0;
+  border-bottom: 1px solid rgb(255 255 255 / 24%);
+}
+
+.area-overlay-navigation .wp-block-navigation-item__content {
+  display: block;
+  width: 100%;
+  color: var(--wp--preset--color--white);
+  font: inherit;
+  padding: 15px 14px;
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+
+.area-overlay-navigation .has-child > .wp-block-navigation-submenu__toggle {
+  flex: 1 1 0;
+  min-width: 0;
+  width: auto;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+/* Reserve one row for the parent label and its submenu icon. */
+.area-overlay-navigation.area-slide-navigation .has-child {
+  flex-direction: row !important;
+  flex-wrap: nowrap;
+  align-items: center !important;
+}
+
+.area-overlay-navigation.area-slide-navigation .has-child > a.wp-block-navigation-item__content {
+  flex: 1 1 0 !important;
+  width: auto;
+  min-width: 0;
+}
+
+/* Keep synthetic Page List toggles beside the parent link. */
+.area-overlay-navigation .has-child > .area-slide-toggle {
+  flex: 0 0 auto;
+  width: auto;
+}
+
+.area-overlay-navigation .has-child > .wp-block-navigation__submenu-icon {
+  color: var(--wp--preset--color--white);
+  margin-inline: 0 14px;
+}
+
+.area-overlay-navigation .has-child > .wp-block-navigation__submenu-container {
+  padding: 8px 0 8px 14px !important;
+  color: var(--wp--preset--color--white);
+}
+
+.area-overlay-navigation
+  .wp-block-navigation__submenu-container
+  .wp-block-navigation-item__content {
+  padding: 15px 14px;
+  color: var(--wp--preset--color--white);
+}
+
+.area-overlay-navigation
+  .wp-block-navigation__submenu-container
+  .wp-block-navigation__submenu-container {
+  padding-left: 14px !important;
+}
+
+.area-overlay-navigation .wp-block-navigation-item__content:hover,
+.area-overlay-navigation .wp-block-navigation-item__content:focus-visible,
+.area-overlay-navigation
+  .current-menu-item
+  > .wp-block-navigation-item__content {
+  color: var(--wp--preset--color--white);
+  background: rgb(255 255 255 / 12%);
+}
+
+.area-overlay-navigation .wp-block-navigation-item__content:focus-visible {
+  outline: 2px solid var(--wp--preset--color--white);
+  outline-offset: -2px;
+}
+
+/* Each level replaces the previous menu while keeping its DOM context. */
+.area-slide-navigation.area-slide-path,
+.area-slide-navigation .area-slide-path,
+.area-slide-navigation .area-slide-branch {
+  display: contents !important;
+}
+
+.area-slide-navigation.area-slide-path > :not(.area-slide-branch),
+.area-slide-navigation .area-slide-path > :not(.area-slide-branch),
+.area-slide-navigation .area-slide-branch > :not(ul),
+.area-slide-navigation
+  .wp-block-navigation__submenu-container:not(.area-slide-current):not(
+    .area-slide-path
+  ) {
+  display: none !important;
+}
+
+.area-slide-navigation
+  .has-child
+  > .wp-block-navigation__submenu-container.area-slide-current {
+  display: flex !important;
+  flex-direction: column;
+  padding: 8px 0 !important;
+  width: 100% !important;
+  animation: area-menu-slide 180ms ease-out;
+}
+
+.area-slide-heading {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 8px 0 16px;
+  color: var(--wp--preset--color--white);
+  font-weight: 600;
+}
+
+.area-slide-back {
+  flex-shrink: 0;
+  border: 0;
+  padding: 8px 0;
+  background: transparent;
+  color: var(--wp--preset--color--white);
+  font: inherit;
+  cursor: pointer;
+}
+
+.area-slide-back:focus-visible {
+  outline: 2px solid var(--wp--preset--color--white);
+  outline-offset: 2px;
+}
+
+@keyframes area-menu-slide {
+  from {
+    opacity: 0;
+    transform: translateX(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .area-slide-navigation .area-slide-current {
+    animation: none !important;
+  }
+}
+
+.area-slide-back:hover,
+.area-slide-back:focus {
+  background: rgb(255 255 255 / 12%);
+  color: var(--wp--preset--color--white);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .area-post-card,
+  .area-b-footer__navigation .wp-block-navigation-item__content {
+    transition: none;
+  }
+}
+
+/* Shared content layouts for all published pages. */
+.area-page {
+  min-width: 0;
+}
+
+.area-page > :is(.area-section, .area-hero, .area-final-cta) {
+  margin-block-start: 0;
+}
+
+.area-page > :is(.area-section, .area-hero, .area-final-cta):not(.alignfull),
+.area-page .alignfull > :is(.alignwide, .area-hero__inner):not(.alignfull) {
+  width: min(1180px, calc(100% - 2 * var(--wp--preset--spacing--small)));
+  margin-inline: auto;
+}
+
+.area-page .area-section--reading {
+  max-width: 1100px;
+  padding-block: clamp(1.75rem, 4vw, 3rem);
+}
+
+.area-page .area-section--reading + .area-section--reading {
+  border-top: 1px solid var(--area-border);
+}
+
+.area-page .area-section--reading > :is(p, ul, ol, blockquote) {
+  max-width: 76ch;
+}
+
+.area-page .area-section--reading > :first-child {
+  margin-block-start: 0;
+}
+
+.area-page .area-section--reading > :last-child {
+  margin-block-end: 0;
+}
+
+.area-page .area-section--intro > p:first-child {
+  font-size: var(--wp--preset--font-size--medium);
+}
+
+.area-page .area-role-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--wp--preset--spacing--medium);
+}
+
+.area-page .area-role-grid > * {
+  margin: 0;
+  min-width: 0;
+}
+
+.area-page .area-role-grid .area-card {
+  height: auto;
+}
+
+.area-page .area-card-grid,
+.area-page .area-resource-grid {
+  align-items: stretch;
+}
+
+.area-page .area-card-grid > .wp-block-column > .area-card {
+  height: 100%;
+}
+
+.area-page .area-callout {
+  margin-block: var(--wp--preset--spacing--medium);
+  padding: clamp(1.25rem, 3vw, 2rem);
+}
+
+.area-page blockquote.area-callout {
+  border-block: 0;
+  border-right: 0;
+}
+
+.area-page .area-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.area-page .area-actions > .wp-block-button {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.area-page .area-actions .wp-block-button__link {
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.area-page .area-status--standalone {
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--area-border);
+  border-left: 4px solid var(--area-red);
+  border-radius: var(--wp--custom--radius--component);
+  background: var(--area-soft);
+}
+
+.area-page .area-media {
+  overflow: hidden;
+  border-radius: var(--wp--custom--radius--component);
+}
+
+.area-page .wp-block-image img {
+  max-width: 100%;
+}
+
+.area-page .wp-block-table {
+  overflow-x: auto;
+  border: 1px solid var(--area-border);
+  border-radius: var(--wp--custom--radius--component);
+}
+
+.area-page .wp-block-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.area-page .wp-block-table :is(td, th) {
+  padding: 0.85rem 1rem;
+  border-color: var(--area-border);
+  overflow-wrap: anywhere;
+}
+
+.area-page .wp-block-table tr:nth-child(odd) {
+  background: var(--area-soft);
+}
+
+.area-page .area-cta :is(h1, h2, h3, h4, p),
+.area-page .area-final-cta :is(h1, h2, h3, h4, p) {
+  color: inherit;
+}
+
+.area-page .area-cta .wp-block-button__link,
+.area-page .area-final-cta .wp-block-button__link {
+  color: var(--wp--preset--color--white);
+}
+
+.area-page .area-cta .is-style-outline .wp-block-button__link,
+.area-page .area-final-cta .is-style-outline .wp-block-button__link {
+  color: var(--wp--preset--color--white);
+  border-color: currentColor;
+}
+
+.area-page--standard {
+  padding-bottom: var(--wp--preset--spacing--0);
+}
+
+.area-main:has(> .area-page-heading) {
+  padding: 0;
+}
+
+.area-page-heading {
+  background: linear-gradient(
+    135deg,
+    var(--wp--preset--color--surface-warm),
+    var(--wp--preset--color--white) 65%,
+    var(--area-soft)
+  );
+  border-bottom: 1px solid var(--area-border);
+  padding: clamp(2rem, 5vw, 4rem) var(--wp--preset--spacing--small);
+}
+
+.area-page-heading .area-entry-title {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0;
+  border: 0;
+  font-size: var(--wp--preset--font-size--xl);
+  color: var(--area-text);
+}
+
+.area-main > .area-page-heading {
+  max-width: none !important;
+  width: 100%;
+}
+
+.area-main > .wp-block-post-content:has(> .area-page) {
+  max-width: none !important;
+  width: 100%;
+  margin-block-start: 0;
+}
+
+body.home main > .entry-content.is-layout-constrained > .area-page {
+  max-width: none;
+  width: 100%;
+  margin-inline: 0;
+}
+
+.area-page .area-section--centered__inner .wp-block-buttons {
+  justify-content: center;
+}
+
+.area-page .area-section--centered__inner {
+  text-align: center;
+}
+
+@media (max-width: 700px) {
+  .area-page .area-role-grid {
+    grid-template-columns: 1fr;
+  }
+  .area-page .area-section--reading {
+    padding-block: 1.75rem;
+  }
+  .area-page .area-actions {
+    align-items: stretch;
+  }
+}
+
+.area-page {
+  overflow-wrap: anywhere;
+}
+
+/* The compact carousel CTA follows the shared tokens without filling its slide. */
+.area-b-carousel .carousel-cta > .wp-block-button {
+  width: auto;
+}
+
+.area-b-carousel .carousel-cta .wp-block-button__link {
+  border-radius: var(--wp--custom--radius--button);
+  background: var(--area-red);
+  font-family: var(--wp--preset--font-family--poppins);
+  font-size: clamp(0.625rem, 2.2vw, 1rem);
+  font-weight: 650;
+  line-height: 1.35;
+  padding: 0.65em 1.1em;
+}
+
+.area-b-carousel .carousel-cta .wp-block-button__link:hover,
+.area-b-carousel .carousel-cta .wp-block-button__link:focus {
+  background: var(--wp--preset--color--aa-red-dark);
+}
+
+.area-page > .area-cta {
+  width: min(1180px, calc(100% - 2 * var(--wp--preset--spacing--small)));
+  margin-inline: auto;
+}

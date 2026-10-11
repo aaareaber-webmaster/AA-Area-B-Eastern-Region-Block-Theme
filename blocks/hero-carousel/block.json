@@ -1,0 +1,62 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "area-b/hero-carousel",
+	"title": "Area B Hero Carousel",
+	"category": "design",
+	"icon": "images-alt2",
+	"description": "A lightweight native Gutenberg hero carousel using Cover blocks as slides.",
+	"textdomain": "area-b",
+	"attributes": {
+		"align": {
+			"type": "string",
+			"default": "full"
+		},
+		"autoplay": {
+			"type": "boolean",
+			"default": true
+		},
+		"interval": {
+			"type": "number",
+			"default": 7.5
+		},
+		"loop": {
+			"type": "boolean",
+			"default": true
+		},
+		"pauseOnHover": {
+			"type": "boolean",
+			"default": true
+		},
+		"showArrows": {
+			"type": "boolean",
+			"default": true
+		},
+		"showDots": {
+			"type": "boolean",
+			"default": true
+		},
+		"ariaLabel": {
+			"type": "string",
+			"default": "Featured content"
+		}
+	},
+	"supports": {
+		"align": [
+			"wide",
+			"full"
+		],
+		"html": false,
+		"spacing": {
+			"margin": true
+		}
+	},
+	"allowedBlocks": [
+		"core/cover"
+	],
+	"editorScript": "area-b-hero-carousel-editor",
+	"viewScript": "area-b-hero-carousel-view",
+	"style": "area-b-hero-carousel-style",
+	"editorStyle": "area-b-hero-carousel-editor-style",
+	"render": "file:./render.php"
+}

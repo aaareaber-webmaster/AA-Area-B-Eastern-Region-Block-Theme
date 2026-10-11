@@ -1,0 +1,30 @@
+<!-- wp:template-part {"slug":"header","tagName":"header"} /-->
+
+<!-- wp:group {"tagName":"main","className":"area-main area-query-main","layout":{"type":"constrained"}} -->
+<main class="wp-block-group area-main area-query-main">
+	<!-- wp:heading {"level":1,"className":"area-archive-title"} -->
+	<h1 class="wp-block-heading area-archive-title">Latest News</h1>
+	<!-- /wp:heading -->
+
+	<!-- wp:query {"query":{"perPage":10,"pages":0,"offset":0,"postType":"post","order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"","inherit":true},"layout":{"type":"default"}} -->
+	<div class="wp-block-query">
+		<!-- wp:post-template {"className":"area-post-list"} -->
+			<!-- wp:group {"tagName":"article","className":"area-post-card","layout":{"type":"constrained"}} -->
+			<article class="wp-block-group area-post-card">
+				<!-- wp:post-title {"isLink":true,"className":"area-post-card__title"} /-->
+				<!-- wp:post-date {"className":"area-post-card__date"} /-->
+				<!-- wp:post-excerpt {"moreText":"Read more","className":"area-post-card__excerpt"} /-->
+			</article>
+			<!-- /wp:group -->
+		<!-- /wp:post-template -->
+		<!-- wp:query-pagination {"layout":{"type":"flex","justifyContent":"space-between"}} -->
+			<!-- wp:query-pagination-previous /-->
+			<!-- wp:query-pagination-numbers /-->
+			<!-- wp:query-pagination-next /-->
+		<!-- /wp:query-pagination -->
+	</div>
+	<!-- /wp:query -->
+</main>
+<!-- /wp:group -->
+
+<!-- wp:template-part {"slug":"footer","tagName":"footer"} /-->

@@ -1,0 +1,15 @@
+body.login {
+	background: #5e8183;
+}
+
+#login h1 a,
+.login h1 a {
+	display: block;
+	width: 200px;
+	height: 200px;
+	margin: 0 auto 20px;
+	background-image: url("../img/aa-logo.svg");
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: contain;
+}

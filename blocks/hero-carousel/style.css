@@ -1,0 +1,193 @@
+.area-b-carousel > .wp-block-cover,
+.area-b-carousel__track > .wp-block-cover {
+	width: 100%;
+	aspect-ratio: 1920 / 542;
+	height: auto;
+	min-height: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+.area-b-carousel .wp-block-cover {
+	position: relative;
+	min-height: 0;
+}
+
+.area-b-carousel .wp-block-cover__inner-container {
+	position: static;
+}
+
+.area-b-carousel .wp-block-cover__image-background {
+	object-fit: contain;
+}
+
+.area-b-carousel {
+	position: relative;
+	width: 100%;
+	overflow: hidden;
+}
+
+.area-b-carousel .carousel-cta {
+	position: absolute;
+	left: 50%;
+	bottom: 35%;
+	transform: translateX(-50%);
+	z-index: 3;
+	width: auto;
+	margin: 0;
+	justify-content: center;
+}
+
+/*
+ * JS-created track.
+ */
+.area-b-carousel__track {
+	display: flex;
+	width: 100%;
+	aspect-ratio: 1920 / 542;
+	transition: transform 500ms ease;
+	will-change: transform;
+	touch-action: pan-y;
+}
+
+.area-b-carousel__track > .wp-block-cover {
+	flex: 0 0 100%;
+	width: 100%;
+	height: 100%;
+	min-height: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+/*
+ * Previous / next controls.
+ */
+.area-b-carousel__arrow {
+	position: absolute;
+	top: 50%;
+	z-index: 5;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 44px;
+	height: 44px;
+	padding: 0;
+	border: 0;
+	border-radius: 50%;
+	background: rgb(0 0 0 / 35%);
+	color: #fff;
+	font: inherit;
+	font-size: 32px;
+	line-height: 1;
+	cursor: pointer;
+	transform: translateY(-50%);
+	transition:
+		background-color 150ms ease,
+		opacity 150ms ease;
+}
+
+.area-b-carousel__arrow:hover,
+.area-b-carousel__arrow:focus-visible {
+	background: rgb(0 0 0 / 70%);
+}
+
+.area-b-carousel__arrow:focus-visible {
+	outline: 2px solid #fff;
+	outline-offset: 2px;
+}
+
+.area-b-carousel__arrow:disabled {
+	opacity: 0.3;
+	cursor: default;
+}
+
+.area-b-carousel__arrow--previous {
+	left: 16px;
+}
+
+.area-b-carousel__arrow--next {
+	right: 16px;
+}
+
+/*
+ * Pagination.
+ */
+.area-b-carousel__pagination {
+	position: absolute;
+	left: 50%;
+	bottom: 16px;
+	z-index: 5;
+	display: flex;
+	gap: 8px;
+	transform: translateX(-50%);
+}
+
+.area-b-carousel__dot {
+	width: 10px;
+	height: 10px;
+	padding: 0;
+	border: 1px solid #fff;
+	border-radius: 50%;
+	background: rgb(255 255 255 / 40%);
+	cursor: pointer;
+}
+
+.area-b-carousel__dot[aria-current="true"] {
+	background: #fff;
+}
+
+.area-b-carousel__dot:focus-visible {
+	outline: 2px solid #fff;
+	outline-offset: 3px;
+}
+
+/*
+ * Original Elementor CTA styling.
+ */
+.area-b-carousel .wp-block-button__link {
+	border-radius: 4px;
+	background: #f0543d;
+	font-family: Poppins, sans-serif;
+	font-weight: 600;
+	text-transform: uppercase;
+}
+
+.area-b-carousel .wp-block-button__link:hover,
+.area-b-carousel .wp-block-button__link:focus {
+	background: #020202;
+}
+
+/*
+ * Match the existing Elementor responsive heights.
+ */
+
+@media (max-width: 767px) {
+	.area-b-carousel__arrow {
+		width: 32px;
+		height: 32px;
+		font-size: 24px;
+	}
+
+	.area-b-carousel__arrow--previous {
+		left: 8px;
+	}
+
+	.area-b-carousel__arrow--next {
+		right: 8px;
+	}
+
+	.area-b-carousel__pagination {
+		bottom: 8px;
+	}
+
+	.area-b-carousel .wp-block-button__link {
+		font-size: 10px;
+		line-height: 1.6;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.area-b-carousel__track {
+		transition: none;
+	}
+}

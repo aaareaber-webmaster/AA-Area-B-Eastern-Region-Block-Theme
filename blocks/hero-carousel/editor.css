@@ -1,0 +1,40 @@
+/* Editor only: one live, editable Cover at a time. */
+.area-b-carousel.area-b-carousel--editor {
+  overflow: visible;
+  padding: 0;
+  border: 0;
+}
+.area-b-carousel__editor-viewport {
+  position: relative;
+  overflow: visible;
+}
+.area-b-carousel--editor .area-b-carousel__editor-track {
+  width: 100%;
+  margin: 0;
+}
+.area-b-carousel--editor .area-b-carousel__editor-track > .wp-block-cover {
+  width: 100%;
+  /* Override the Cover editor's inline aspect-ratio: unset. */
+  aspect-ratio: 1920 / 542 !important;
+  height: auto;
+  min-height: 0 !important;
+  margin: 0 !important;
+  box-sizing: border-box;
+}
+/* Give empty slides enough space for the media placeholder. */
+.area-b-carousel--editor
+  .area-b-carousel__editor-track
+  > .wp-block-cover:has(.block-editor-media-placeholder) {
+  min-height: 220px !important;
+}
+.area-b-carousel__editor-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 0;
+}
+.area-b-carousel__editor-controls > span {
+  margin-right: 4px;
+  font-size: 12px;
+}
