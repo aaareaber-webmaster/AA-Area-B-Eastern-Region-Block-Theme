@@ -171,13 +171,17 @@ function area_b_enqueue_navigation_meta_editor_script()
 
 	wp_enqueue_script(
 		'area-b-navigation-meta-editor',
-		get_stylesheet_directory_uri() . '/assets/js/editor-navigation-meta.js',
+		get_stylesheet_directory_uri() . '/assets/editor-navigation-meta.js',
 		array(
 			'wp-plugins',
 			'wp-edit-post',
 			'wp-element',
 			'wp-components',
 			'wp-data',
+			'wp-compose',
+			'wp-hooks',
+			'wp-core-data',
+			'wp-block-editor',
 		),
 		filemtime($script_path),
 		true

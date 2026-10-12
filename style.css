@@ -884,7 +884,7 @@ address.tribe-events-calendar-list__event-venue.tribe-common-b2 span {
   }
 
   .area-b-footer__logo {
-    max-width: 230px;
+    max-width: 100px;
   }
 
   .area-b-footer__bottom-inner {
@@ -1661,7 +1661,7 @@ address.tribe-events-calendar-list__event-venue.tribe-common-b2 span {
   border-top: 1px solid var(--area-border);
 }
 
-.area-page .area-section--reading > :is(p, ul, ol, blockquote) {
+.area-page .area-section--reading > :is(ul, ol, blockquote) {
   max-width: 76ch;
 }
 
