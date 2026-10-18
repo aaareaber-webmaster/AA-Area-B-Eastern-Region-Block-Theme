@@ -61,6 +61,11 @@ main {
     margin-block-end: var(--wp--preset--spacing--0);
 }
 
+a {
+  display: inline-block;
+  padding-block: 3px;
+}
+
 a:focus-visible,
 button:focus-visible,
 input:focus-visible,
@@ -128,13 +133,6 @@ img {
   line-height: 1.1;
   white-space: nowrap;
   text-align: left;
-}
-
-.site-branding-title {
-  font-size: 0.875rem;
-}
-
-.site-branding-region {
   font-size: 0.875rem;
 }
 
@@ -507,7 +505,7 @@ select {
 
 :where(.gform_wrapper, .search-form)
   :is(input[type="submit"], input[type="button"], button[type="submit"]):hover {
-  background: var(--wp--preset--color--aa-red-dark);
+  background: var(--wp--preset--color--aa-red);
 }
 
 .subscribe-link {
@@ -690,6 +688,10 @@ address.tribe-events-calendar-list__event-venue.tribe-common-b2 span {
   .tribe-events-calendar-list
   article.tribe-events-calendar-list__event {
   padding: 0;
+}
+
+.wp-block-latest-posts__post-title {
+    color: var(--area-red);
 }
 
 :where(.wp-site-blocks) > :last-child {
@@ -1057,13 +1059,13 @@ address.tribe-events-calendar-list__event-venue.tribe-common-b2 span {
 .area-page
   .wp-block-button:not(.is-style-outline)
   .wp-block-button__link:hover {
-  background: var(--wp--preset--color--aa-red-dark);
+  background: var(--wp--preset--color--aa-red);
   transform: translateY(-1px);
 }
 
 .area-page .wp-block-button.is-style-outline .wp-block-button__link {
   border-color: var(--area-red);
-  color: var(--wp--preset--color--aa-red-dark);
+  color: var(--wp--preset--color--aa-red);
 }
 
 .area-page .wp-block-button.is-style-outline .wp-block-button__link:hover {
@@ -1094,7 +1096,7 @@ address.tribe-events-calendar-list__event-venue.tribe-common-b2 span {
 }
 
 .area-page .area-status__label {
-  color: var(--wp--preset--color--aa-red-dark);
+  color: var(--wp--preset--color--aa-red);
   white-space: nowrap;
 }
 
@@ -1137,7 +1139,7 @@ address.tribe-events-calendar-list__event-venue.tribe-common-b2 span {
 
 .area-page .area-card__label {
   margin-bottom: 0.5rem;
-  color: var(--wp--preset--color--aa-red-dark);
+  color: var(--wp--preset--color--aa-red);
   font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 0.06em;
@@ -1252,7 +1254,7 @@ address.tribe-events-calendar-list__event-venue.tribe-common-b2 span {
 }
 
 .area-page .area-resource-list a {
-  color: var(--wp--preset--color--aa-red-dark);
+  color: var(--wp--preset--color--aa-red);
   text-decoration-thickness: 1px;
   text-underline-offset: 0.15em;
 }
@@ -1868,7 +1870,7 @@ body.home main > .entry-content.is-layout-constrained > .area-page {
 
 .area-b-carousel .carousel-cta .wp-block-button__link:hover,
 .area-b-carousel .carousel-cta .wp-block-button__link:focus {
-  background: var(--wp--preset--color--aa-red-dark);
+  background: var(--wp--preset--color--aa-red);
 }
 
 .area-page > .area-cta {

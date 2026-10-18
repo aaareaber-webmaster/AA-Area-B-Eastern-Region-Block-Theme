@@ -161,6 +161,80 @@ add_filter(
 	2
 );
 
+/**
+ * Fix invalid list markup generated when a Page List block is used
+ * directly inside the automatic Navigation block.
+ *
+ * WordPress normally renders:
+ *
+ * <ul class="wp-block-navigation__container">
+ *     <ul class="wp-block-page-list">
+ *         <li>...</li>
+ *     </ul>
+ * </ul>
+ *
+ * This removes only the redundant Page List <ul>, leaving its <li>
+ * elements as direct children of the Navigation <ul>.
+ */
+function area_b_fix_page_list_navigation_markup( $block_content, $block ) {
+
+	// Only target this theme's automatic navigation.
+	$class_name = $block['attrs']['className'] ?? '';
+
+	if (
+		! str_contains( $class_name, 'area-overlay-navigation' ) &&
+		! str_contains( $class_name, 'area-primary-navigation' )
+	) {
+		return $block_content;
+	}
+
+	// Make sure the Navigation directly contains a Page List block.
+	$has_page_list = false;
+
+	foreach ( $block['innerBlocks'] ?? array() as $inner_block ) {
+		if ( 'core/page-list' === ( $inner_block['blockName'] ?? '' ) ) {
+			$has_page_list = true;
+			break;
+		}
+	}
+
+	if ( ! $has_page_list ) {
+		return $block_content;
+	}
+
+	/*
+	 * Remove the opening wp-block-page-list <ul>.
+	 */
+	$block_content = preg_replace(
+		'/<ul\b[^>]*class="[^"]*\bwp-block-page-list\b[^"]*"[^>]*>/',
+		'',
+		$block_content,
+		1
+	);
+
+	/*
+	 * Remove the corresponding closing </ul>.
+	 *
+	 * At this point the Page List wrapper is the last list closed before
+	 * the Navigation container itself closes.
+	 */
+	$block_content = preg_replace(
+		'/<\/ul>(\s*)<\/ul>(\s*<\/div>)/',
+		'$1</ul>$2',
+		$block_content,
+		1
+	);
+
+	return $block_content;
+}
+
+add_filter(
+	'render_block_core/navigation',
+	'area_b_fix_page_list_navigation_markup',
+	10,
+	2
+);
+
 function area_b_enqueue_navigation_meta_editor_script()
 {
 	$script_path = get_stylesheet_directory() . '/assets/js/editor-navigation-meta.js';

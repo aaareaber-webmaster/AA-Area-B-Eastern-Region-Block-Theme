@@ -191,3 +191,23 @@
 		transition: none;
 	}
 }
+
+.area-b-carousel__dot {
+    position: relative;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+}
+
+.area-b-carousel__dot::before {
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    inset: 50% auto auto 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: currentColor;
+}

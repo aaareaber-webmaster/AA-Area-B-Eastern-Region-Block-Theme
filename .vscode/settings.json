@@ -1,0 +1,23 @@
+{
+  "php.stubs": [
+    "*",
+    "wordpress"
+  ],
+  "github.copilot.chat.commitMessageGeneration.instructions": [
+    {
+      "text": "Describe the actual changes in the diff accurately. Do not invent intent, benefits, fixes, testing, or functionality that the diff does not demonstrate."
+    },
+    {
+      "text": "Use a concise imperative subject, ideally under 72 characters. Be specific about the affected feature or behaviour. Avoid vague subjects such as 'Update files', 'Improve code', or 'Various fixes'."
+    },
+    {
+      "text": "For simple changes, write only a subject. For complex changes, add a blank line followed by a short body explaining the main changes. Mention the reason only when it is supported by the available context."
+    },
+    {
+      "text": "Distinguish functional changes from formatting, refactoring, configuration, and content changes. Do not describe a refactor as a bug fix unless the diff supports that."
+    },
+    {
+      "text": "Use plain English. Do not use emojis, em dashes, promotional language, or claims that tests passed."
+    }
+  ]
+}
